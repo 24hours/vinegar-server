@@ -7,14 +7,14 @@ var crypto = require('crypto');
 var mkdirp = require('mkdirp');
 
 // read
-app.get('/data', function(req, res){
+app.get('/dataset', function(req, res){
     db.all("SELECT id, name FROM datas", function(err, rows){
-        res.status(300).json({'data': rows})
+        res.status(200).json({'data': rows})
     });
 });
 
 // create
-app.post('/data', function(req, res){
+app.post('/dataset', function(req, res){
     var path = crypto.randomBytes(20).toString('hex');
     var name = req.body['name'] || undefined;
     if(name == undefined){
@@ -31,7 +31,7 @@ app.post('/data', function(req, res){
     }
 });
 
-app.post('/data/upload', upload.single('file'), function (req, res) {
+app.post('/dataset/upload', upload.single('file'), function (req, res) {
     var id = req.body['id'];
     if(!id){
         res.status(500).json({"error": "id must be defined"});
