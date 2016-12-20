@@ -1,5 +1,6 @@
 var app = require('./app').app;
 require('./resources/dataset');
+require('./resources/data');
 
 app.get('/', function (req, res) {
     res.send('Hello World!')
