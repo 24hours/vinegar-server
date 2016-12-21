@@ -14,16 +14,39 @@ exports.setup = function(options, seedLink) {
     seed = seedLink;
 };
 
-exports.up = function(db) {
-    return db.createTable('datas', {
+exports.up = function(db, callback) {
+    db.createTable('dataset', {
         id: { type: 'int', primaryKey: true, autoIncrement: true },
         name: 'string',
         path: 'string'
-    });
+    }, callback);
+
+    db.createTable('label', {
+        id: { type: 'int', primaryKey: true, autoIncrement: true },
+        dataset_id: 'int',
+        name: 'string'
+    }, callback);
+
+    db.createTable('data', {
+        id: 'int',
+        dataset_id: 'int',
+        name: 'string',
+        path: 'string',
+    }, callback);
+
+    db.createTable('data_label', {
+        label_id: 'int',
+        dataset_id: 'int',
+        data: 'string'
+    }, callback);
+
 };
 
-exports.down = function(db) {
-    return db.dropTable('datas');
+exports.down = function(db, callback) {
+    db.dropTable('dataset', callback);
+    db.dropTable('label', callback);
+    db.dropTable('data', callback);
+    db.dropTable('data_label', callback);
 };
 
 exports._meta = {

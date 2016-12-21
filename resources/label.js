@@ -7,7 +7,7 @@ var crypto = require('crypto');
 var mkdirp = require('mkdirp');
 
 // read
-app.get('/dataset', function(req, res){
+app.get('/label', function(req, res){
     db.all("SELECT id, name FROM dataset", function(err, rows){
         res.status(200).json({'data': rows})
     });
@@ -66,20 +66,6 @@ app.post('/dataset/upload', upload.single('file'), function (req, res) {
         });
     }
 });
-
-// function walkSync(dir, filelist) {
-//     var fs = fs || require('fs'),
-//         files = fs.readdirSync(dir);
-//     filelist = filelist || [];
-//     files.forEach(function(file) {
-//         if (fs.statSync(dir + file).isDirectory()) {
-//             filelist = walkSync(dir + file + '/', filelist);
-//         } else {
-//             filelist.push({name: file, path: dir + '/' + file});
-//         }
-//     });
-//     return filelist;
-// };
 
 app.get('/dataset/:id', function (req, res) {
     var stmt = db.prepare("SELECT name, path FROM data WHERE dataset_id=?");
