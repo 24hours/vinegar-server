@@ -82,7 +82,7 @@ app.post('/dataset/upload', upload.single('file'), function (req, res) {
 // };
 
 app.get('/dataset/:id', function (req, res) {
-    var stmt = db.prepare("SELECT name, path FROM data WHERE dataset_id=?");
+    var stmt = db.prepare("SELECT id, name, path FROM data WHERE dataset_id=?");
     stmt.all(req.params.id, function(err, row){
         if(!err){
             res.status(200).json({"data": row})

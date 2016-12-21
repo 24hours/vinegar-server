@@ -28,7 +28,7 @@ exports.up = function(db, callback) {
     }, callback);
 
     db.createTable('data', {
-        id: 'int',
+        id: { type: 'int', primaryKey: true, autoIncrement: true },
         dataset_id: 'int',
         name: 'string',
         path: 'string',
