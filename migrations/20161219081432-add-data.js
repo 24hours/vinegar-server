@@ -36,7 +36,7 @@ exports.up = function(db, callback) {
 
     db.createTable('data_label', {
         label_id: 'int',
-        dataset_id: 'int',
+        data_id: 'int',
         data: 'string'
     }, callback);
 
